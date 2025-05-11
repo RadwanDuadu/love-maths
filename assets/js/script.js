@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    runGame("addition");
+    runGame("Addition");
         
 });
 
@@ -23,7 +23,7 @@ function runGame(gameType) {
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
 
-    if(gameType === "addition") {
+    if(gameType === "Addition") {
         displayAdditionQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
@@ -43,7 +43,9 @@ function checkAnswer() {
         alert(`Wrong! The correct answer was ${correctAnswer[0]}`);
         incrementWrongAnswer();
     }
-
+    // Clear the answer box
+    // and generate new question
+    document.getElementById("answer-box").value = "";
     runGame(correctAnswer[1]);
 }
 
@@ -54,7 +56,7 @@ function calculateCorrectAnswer() {
     let operator = document.getElementById("operator").innerText;
 
     if(operator === "+") {
-        return [operand1 * operand2, "Addition"];
+        return [operand1 + operand2, "Addition"];
     } else {
         alert("Unimplement operator: ${operator}");
         throw "Unimplement operator: ${operator}. Aborting!";
@@ -63,17 +65,22 @@ function calculateCorrectAnswer() {
 }
 
 function incrementScore() {
-
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
+    console.log(oldScore);
 }
 
 function incrementWrongAnswer() {
+    let oldScore = parseInt(document.getElementById("Incorrect").innerText);
+    document.getElementById("Incorrect").innerText = ++oldScore;
+    console.log(oldScore);
 }
 
 function displayAdditionQuestion(operand1, operand2) {
-    document.getElementById("operand1").textContent = operand1;
-    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operand1").innerHTML = operand1;
+    document.getElementById("operand2").innerHTML = operand2;
 
-    document.getElementById("operator").textContent = "+";
+    document.getElementById("operator").innerHTML = "+";
 
 
 }

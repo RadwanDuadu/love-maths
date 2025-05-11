@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for(let button of Buttons) {
         button.addEventListener("click", function() {
             if(this.getAttribute("data-type") === "submit") {
-                alert("You clicked the submit button!");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 alert("You clicked a button with data-type: " + gameType);
@@ -33,6 +33,18 @@ function runGame(gameType) {
 
 function checkAnswer() {
 
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let correctAnswer = calculateCorrectAnswer();
+
+    if(userAnswer === correctAnswer[0]) {
+        alert("Correct, You got it right!");
+        incrementScore();
+    } else {
+        alert(`Wrong! The correct answer was ${correctAnswer[0]}`);
+        incrementWrongAnswer();
+    }
+
+    runGame(correctAnswer[1]);
 }
 
 function calculateCorrectAnswer() {
